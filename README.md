@@ -1,5 +1,7 @@
 # Steam 市场批量助手
 
+[English](README.en.md)
+
 Chrome / Edge Manifest V3 扩展，用于批量下架 Steam 社区市场中的在售商品，并生成官方批量上架页面。
 
 ## 功能
