@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Steam 市场批量助手</title>
+  <style>
+    body {
+      width: 350px;
+      margin: 0;
+      padding: 16px;
+      background: #202327;
+      color: #edf1f3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #3d454d;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 15px;
+      color: #ffffff;
+    }
+    .feature-badge {
+      background: #34734b;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .status-card {
+      background: #17191c;
+      border: 1px solid #3d454d;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 12px;
+      background: #34393f;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #41474e;
+    }
+    .btn-primary {
+      background: #17698d;
+    }
+    .btn-primary:hover {
+      background: #1d7da8;
+    }
+    .muted { color: #8f98a0; }
+    .multisell {
+      margin-top: 4px;
+      border-top: 1px solid #3d454d;
+      padding-top: 8px;
+    }
+    .multisell > summary {
+      cursor: pointer;
+      color: #edf1f3;
+      font-weight: 650;
+    }
+    .multisell[open] > summary {
+      margin-bottom: 10px;
+    }
+    .multisell-form {
+      display: grid;
+      gap: 8px;
+    }
+    .id-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px;
+    }
+    .field {
+      display: grid;
+      min-width: 0;
+      gap: 4px;
+      color: #aeb7bf;
+      font-size: 11px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #4a545e;
+      border-radius: 4px;
+      background: #17191c;
+      padding: 7px 9px;
+      color: #eef2f4;
+      font: 12px/1.4 "Segoe UI", sans-serif;
+    }
+    .field input {
+      height: 34px;
+    }
+    .field select {
+      height: 34px;
+    }
+    .field textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+    .field input:focus-visible,
+    .field select:focus-visible,
+    .field textarea:focus-visible,
+    .multisell summary:focus-visible,
+    .btn:focus-visible {
+      outline: 2px solid #77c7f2;
+      outline-offset: 2px;
+    }
+    .multisell-meta {
+      display: grid;
+      min-height: 16px;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 8px;
+      color: #8f98a0;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+    .multisell-status {
+      overflow-wrap: anywhere;
+      text-align: right;
+    }
+    .multisell-status-error { color: #ff8989; }
+    .multisell-status-success { color: #83cf9d; }
+    .multisell-status-warning { color: #e9bb6c; }
+    .advanced {
+      border-left: 2px solid #3d454d;
+      padding-left: 8px;
+    }
+    .advanced > summary {
+      cursor: pointer;
+      color: #98a3ac;
+      font-size: 11px;
+    }
+    .advanced[open] > summary {
+      margin-bottom: 7px;
+    }
+    .field input[aria-invalid="true"],
+    .field textarea[aria-invalid="true"] {
+      border-color: #b84e4e;
+    }
+    .field textarea::placeholder {
+      color: #78838d;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>Steam 市场批量助手</h2>
+    <span id="version-badge" class="feature-badge"></span>
+  </div>
+
+  <div class="status-card">
+    <div class="status-row">
+      <span>插件状态</span>
+      <span id="page-status" class="muted">正在检测...</span>
+    </div>
+    <div class="status-row">
+      <span>任务状态</span>
+      <span id="task-status" class="muted">-</span>
+    </div>
+  </div>
+
+  <button id="open-market-btn" class="btn btn-primary">打开 Steam 社区市场</button>
+
+  <details class="multisell">
+    <summary>批量上架</summary>
+    <form id="multisell-form" class="multisell-form" novalidate>
+      <label class="field" for="multisell-game">
+        <span>游戏</span>
+        <select id="multisell-game"></select>
+      </label>
+      <details id="multisell-advanced" class="advanced">
+        <summary>高级设置</summary>
+        <div class="id-grid">
+          <label class="field" for="multisell-appid">
+            <span>AppID</span>
+            <input id="multisell-appid" type="text" inputmode="numeric" maxlength="10" value="730" autocomplete="off" />
+          </label>
+          <label class="field" for="multisell-contextid">
+            <span>ContextID</span>
+            <input id="multisell-contextid" type="text" inputmode="numeric" maxlength="20" value="2" autocomplete="off" />
+          </label>
+        </div>
+      </details>
+      <label class="field" for="multisell-items">
+        <span>商品链接或市场名称（每行一种）</span>
+        <textarea id="multisell-items" rows="4" spellcheck="false" autocomplete="off" placeholder="粘贴 Steam 商品链接，或输入市场名称" aria-describedby="multisell-count multisell-status"></textarea>
+      </label>
+      <button id="multisell-add-current" class="btn" type="button" hidden>＋ 添加当前页面商品</button>
+      <div class="multisell-meta">
+        <span id="multisell-count">0 / 100</span>
+        <span id="multisell-status" class="multisell-status" role="status" aria-live="polite"></span>
+      </div>
+      <button class="btn btn-primary" type="submit">打开官方批量上架</button>
+    </form>
+  </details>
+
+  <script src="core.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

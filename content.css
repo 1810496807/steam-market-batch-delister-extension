@@ -1,0 +1,561 @@
+:host {
+  all: initial;
+}
+
+#steam-batch-delister-panel {
+  all: initial;
+  position: fixed;
+  top: 64px;
+  right: 16px;
+  z-index: 2147483646;
+  display: block;
+  width: min(460px, calc(100vw - 24px));
+  max-height: calc(100vh - 80px);
+  overflow: hidden;
+  border: 1px solid #46515d;
+  border-radius: 8px;
+  background: #202327;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.5);
+  color: #edf1f3;
+  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color-scheme: dark;
+}
+
+#steam-batch-delister-panel,
+#steam-batch-delister-panel *,
+#steam-batch-delister-panel *::before,
+#steam-batch-delister-panel *::after {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+#steam-batch-delister-panel [hidden] {
+  display: none !important;
+}
+
+#steam-batch-delister-panel.sbd-minimized {
+  width: 260px;
+}
+
+#steam-batch-delister-panel.sbd-minimized .sbd-body {
+  display: none;
+}
+
+#steam-batch-delister-panel .sbd-header {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  border-bottom: 1px solid #3a4148;
+  background: #292d32;
+}
+
+#steam-batch-delister-panel .sbd-title {
+  overflow: hidden;
+  color: #f5f7f8;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-version {
+  margin-top: 2px;
+  color: #9ba5ae;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+#steam-batch-delister-panel .sbd-icon-btn {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #c7cdd2;
+  cursor: pointer;
+  font: 600 18px/1 "Segoe UI", sans-serif;
+}
+
+#steam-batch-delister-panel .sbd-icon-btn:hover {
+  border-color: #59636d;
+  background: #353a40;
+  color: #ffffff;
+}
+
+#steam-batch-delister-panel .sbd-body {
+  display: flex;
+  max-height: calc(100vh - 132px);
+  flex-direction: column;
+  gap: 9px;
+  padding: 11px;
+  overflow-y: auto;
+}
+
+#steam-batch-delister-panel .sbd-stat-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid #3d454d;
+  border-radius: 5px;
+  background: #3d454d;
+}
+
+#steam-batch-delister-panel .sbd-stat-bar span {
+  min-width: 0;
+  padding: 7px 8px;
+  background: #262a2e;
+  color: #aeb7bf;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-stat-bar strong {
+  color: #77c7f2;
+  font-size: 14px;
+}
+
+#steam-batch-delister-panel .sbd-btn {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font: 600 12px/1.2 "Segoe UI", "Microsoft YaHei UI", sans-serif;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-btn:focus-visible,
+#steam-batch-delister-panel input:focus-visible,
+#steam-batch-delister-panel select:focus-visible,
+#steam-batch-delister-panel textarea:focus-visible,
+#steam-batch-delister-panel summary:focus-visible,
+#steam-batch-delister-panel .sbd-icon-btn:focus-visible {
+  outline: 2px solid #77c7f2;
+  outline-offset: 2px;
+}
+
+#steam-batch-delister-panel .sbd-btn:disabled,
+#steam-batch-delister-panel input:disabled,
+#steam-batch-delister-panel select:disabled,
+#steam-batch-delister-panel textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+#steam-batch-delister-panel .sbd-btn-accent {
+  width: 100%;
+  border-color: #2380aa;
+  background: #17698d;
+  color: #ffffff;
+}
+
+#steam-batch-delister-panel .sbd-btn-accent:hover:not(:disabled) {
+  background: #1d7da8;
+}
+
+#steam-batch-delister-panel .sbd-top-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+#steam-batch-delister-panel .sbd-multisell {
+  border-top: 1px solid #3a4148;
+  border-bottom: 1px solid #3a4148;
+  padding: 7px 0;
+}
+
+#steam-batch-delister-panel .sbd-multisell > summary {
+  color: #dce3e7;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+  list-style-position: outside;
+}
+
+#steam-batch-delister-panel .sbd-multisell[open] > summary {
+  margin-bottom: 9px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-form {
+  display: grid;
+  gap: 8px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-field-label {
+  color: #aeb7bf;
+  font-size: 11px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-advanced {
+  border-left: 2px solid #3d454d;
+  padding-left: 8px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-advanced > summary {
+  color: #98a3ac;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-advanced[open] > summary {
+  margin-bottom: 7px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-ids {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 7px;
+}
+
+#steam-batch-delister-panel .sbd-multisell-ids label {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  color: #aeb7bf;
+  font-size: 11px;
+}
+
+#steam-batch-delister-panel .sbd-multisell textarea {
+  width: 100%;
+  min-height: 82px;
+  resize: vertical;
+  border: 1px solid #4a545e;
+  border-radius: 4px;
+  background: #17191c;
+  padding: 7px 9px;
+  color: #eef2f4;
+  font: 12px/1.4 "Segoe UI", "Microsoft YaHei UI", sans-serif;
+}
+
+#steam-batch-delister-panel .sbd-multisell-meta {
+  display: grid;
+  min-height: 16px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  color: #8f9aa3;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+#steam-batch-delister-panel .sbd-multisell-status {
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+#steam-batch-delister-panel .sbd-multisell-status-error {
+  color: #ff8989;
+}
+
+#steam-batch-delister-panel .sbd-multisell-status-success {
+  color: #83cf9d;
+}
+
+#steam-batch-delister-panel .sbd-multisell-status-warning {
+  color: #e9bb6c;
+}
+
+#steam-batch-delister-panel .sbd-multisell input[aria-invalid="true"],
+#steam-batch-delister-panel .sbd-multisell textarea[aria-invalid="true"] {
+  border-color: #b84e4e;
+}
+
+#steam-batch-delister-panel .sbd-filter-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 138px;
+  gap: 7px;
+}
+
+#steam-batch-delister-panel input[type="search"],
+#steam-batch-delister-panel input[type="text"],
+#steam-batch-delister-panel input[type="number"],
+#steam-batch-delister-panel select {
+  min-width: 0;
+  height: 34px;
+  border: 1px solid #4a545e;
+  border-radius: 4px;
+  background: #17191c;
+  color: #eef2f4;
+  font: 12px/1.2 "Segoe UI", "Microsoft YaHei UI", sans-serif;
+}
+
+#steam-batch-delister-panel input[type="search"] {
+  width: 100%;
+  padding: 6px 9px;
+}
+
+#steam-batch-delister-panel input[type="text"] {
+  width: 100%;
+  padding: 6px 9px;
+}
+
+#steam-batch-delister-panel select {
+  width: 100%;
+  padding: 5px 7px;
+}
+
+#steam-batch-delister-panel input::placeholder,
+#steam-batch-delister-panel textarea::placeholder {
+  color: #78838d;
+  opacity: 1;
+}
+
+#steam-batch-delister-panel .sbd-selection-actions,
+#steam-batch-delister-panel .sbd-main-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+#steam-batch-delister-panel .sbd-btn-secondary {
+  border-color: #525b64;
+  background: #34393f;
+  color: #e1e5e8;
+}
+
+#steam-batch-delister-panel .sbd-btn-secondary:hover:not(:disabled) {
+  background: #41474e;
+}
+
+#steam-batch-delister-panel .sbd-btn-primary {
+  grid-column: 1 / -1;
+  width: 100%;
+  border-color: #478e62;
+  background: #34734b;
+  color: #ffffff;
+}
+
+#steam-batch-delister-panel .sbd-btn-primary:hover:not(:disabled) {
+  background: #3e8658;
+}
+
+#steam-batch-delister-panel .sbd-btn-warning {
+  border-color: #ae7b2b;
+  background: #76531f;
+  color: #fff4df;
+}
+
+#steam-batch-delister-panel .sbd-btn-danger {
+  border-color: #b84e4e;
+  background: #823b3b;
+  color: #ffffff;
+}
+
+#steam-batch-delister-panel .sbd-btn-danger:hover:not(:disabled) {
+  background: #984545;
+}
+
+#steam-batch-delister-panel .sbd-listings {
+  min-height: 112px;
+  max-height: 248px;
+  overflow-y: auto;
+  border: 1px solid #3d454d;
+  border-radius: 5px;
+  background: #17191c;
+}
+
+#steam-batch-delister-panel .sbd-listing-row {
+  display: grid;
+  min-height: 48px;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid #2f353b;
+  cursor: pointer;
+}
+
+#steam-batch-delister-panel .sbd-listing-row:last-child {
+  border-bottom: 0;
+}
+
+#steam-batch-delister-panel .sbd-listing-row:hover {
+  background: #23272b;
+}
+
+#steam-batch-delister-panel .sbd-listing-checkbox {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #4ba5ce;
+}
+
+#steam-batch-delister-panel .sbd-listing-details {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#steam-batch-delister-panel .sbd-listing-name {
+  overflow: hidden;
+  color: #edf1f3;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-listing-meta {
+  overflow: hidden;
+  color: #929da6;
+  font-size: 10px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-listing-status {
+  max-width: 72px;
+  overflow: hidden;
+  color: #aab3ba;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-status-removing,
+#steam-batch-delister-panel .sbd-status-submitted {
+  color: #77c7f2;
+}
+
+#steam-batch-delister-panel .sbd-status-failed,
+#steam-batch-delister-panel .sbd-status-unknown {
+  color: #ff8989;
+}
+
+#steam-batch-delister-panel .sbd-empty-state {
+  display: flex;
+  min-height: 110px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #8d979f;
+  font-size: 12px;
+  text-align: center;
+}
+
+#steam-batch-delister-panel .sbd-run-settings {
+  display: grid;
+  grid-template-columns: auto 92px auto;
+  align-items: center;
+  gap: 7px;
+  color: #aeb7bf;
+  font-size: 12px;
+}
+
+#steam-batch-delister-panel .sbd-run-settings input {
+  width: 92px;
+  padding: 5px 7px;
+}
+
+#steam-batch-delister-panel .sbd-progress-section {
+  display: grid;
+  gap: 4px;
+}
+
+#steam-batch-delister-panel .sbd-progress-track {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #111315;
+}
+
+#steam-batch-delister-panel .sbd-progress-bar {
+  width: 0;
+  height: 100%;
+  background: #55a873;
+  transition: width 160ms ease;
+}
+
+#steam-batch-delister-panel .sbd-progress-text {
+  min-height: 16px;
+  overflow: hidden;
+  color: #9ca6ae;
+  font-size: 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#steam-batch-delister-panel .sbd-log-box {
+  height: 98px;
+  overflow-y: auto;
+  border: 1px solid #343b42;
+  border-radius: 5px;
+  background: #111315;
+  padding: 6px 8px;
+  color: #9da7af;
+  font-family: Consolas, "Microsoft YaHei UI", monospace;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+#steam-batch-delister-panel .sbd-log-item {
+  overflow-wrap: anywhere;
+}
+
+#steam-batch-delister-panel .sbd-log-success {
+  color: #83cf9d;
+}
+
+#steam-batch-delister-panel .sbd-log-warning {
+  color: #e9bb6c;
+}
+
+#steam-batch-delister-panel .sbd-log-error {
+  color: #ff8989;
+}
+
+@media (max-width: 600px) {
+  #steam-batch-delister-panel {
+    top: 8px;
+    right: 8px;
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 16px);
+  }
+
+  #steam-batch-delister-panel.sbd-minimized {
+    width: calc(100vw - 16px);
+    max-width: 260px;
+  }
+
+  #steam-batch-delister-panel .sbd-body {
+    max-height: calc(100vh - 68px);
+  }
+
+  #steam-batch-delister-panel .sbd-filter-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #steam-batch-delister-panel .sbd-listing-name,
+  #steam-batch-delister-panel .sbd-listing-status {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
